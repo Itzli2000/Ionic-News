@@ -1,3 +1,4 @@
+import { ResponseTopHeadlines } from './../../models/interfaces';
 import { Component } from '@angular/core';
 import { Article } from 'src/app/models/interfaces';
 import { NewsService } from '../../services/news.service';
