@@ -19,3 +19,12 @@ export interface Source {
   id?: string;
   name: string;
 }
+
+export interface AsyncEvent extends CustomEvent {
+  target: EventTarget & {
+    disabled: boolean;
+    threshold: string;
+    position: string;
+    complete(): void;
+  };
+}

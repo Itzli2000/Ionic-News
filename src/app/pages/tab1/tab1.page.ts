@@ -1,6 +1,5 @@
-import { ResponseTopHeadlines } from './../../models/interfaces';
 import { Component } from '@angular/core';
-import { Article } from 'src/app/models/interfaces';
+import { Article, AsyncEvent } from 'src/app/models/interfaces';
 import { NewsService } from '../../services/news.service';
 
 @Component({
@@ -14,8 +13,25 @@ export class Tab1Page {
   constructor(private newsService: NewsService) {}
 
   ngOnInit(): void {
+    this.loadNews();
+  }
+
+  loadNews(event?: AsyncEvent) {
     this.newsService.getTopHeadlines().subscribe((resp) => {
+      if(event && resp.articles.length === 0) {
+        event.target.complete();
+        event.target.disabled = true;
+        return;
+      }
       this.news.push(...resp.articles);
+      if(event) {
+        event.target.complete();
+        return;
+      }
     });
+  }
+
+  loadData(event: AsyncEvent) {
+    this.loadNews(event);
   }
 }
