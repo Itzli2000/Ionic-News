@@ -1,7 +1,7 @@
+import { Article } from './../../models/interfaces';
 import { NewsService } from './../../services/news.service';
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { IonSegment } from '@ionic/angular';
-import { ResponseTopHeadlines } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-tab2',
@@ -20,18 +20,27 @@ export class Tab2Page implements OnInit, AfterViewInit {
     'sports',
     'technology',
   ];
+  news: Article[] = [];
 
-  constructor(
-    private newService: NewsService,
-  ) {}
+  constructor(private newService: NewsService) {}
 
   ngOnInit() {
-    this.newService.getTopHeadlinesCategory(this.categories[0]).subscribe((resp) => {
-      console.log(resp)
-    });
+    this.loadNews(this.categories[0]);
   }
 
   ngAfterViewInit() {
     this.segment.value = this.categories[0];
+  }
+
+  segmentChanged(event: CustomEvent) {
+    const { value } = event.detail;
+    this.news = [];
+    this.loadNews(value);
+  }
+
+  loadNews(category: string) {
+    this.newService
+      .getTopHeadlinesCategory(category)
+      .subscribe((resp) => this.news.push(...resp.articles));
   }
 }
