@@ -1,7 +1,7 @@
-import { Article } from './../../models/interfaces';
+import { Article, AsyncEvent } from './../../models/interfaces';
 import { NewsService } from './../../services/news.service';
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
-import { IonSegment } from '@ionic/angular';
+import { IonInfiniteScroll, IonSegment } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab2',
@@ -10,7 +10,10 @@ import { IonSegment } from '@ionic/angular';
 })
 export class Tab2Page implements OnInit, AfterViewInit {
   @ViewChild(IonSegment) segment: IonSegment;
+  @ViewChild(IonInfiniteScroll) infinite: IonInfiniteScroll;
 
+  loadingCategory: string;
+  currentCategory: string;
   categories: string[] = [
     'business',
     'entertainment',
@@ -26,6 +29,8 @@ export class Tab2Page implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.loadNews(this.categories[0]);
+    this.currentCategory = this.categories[0];
+    this.loadingCategory = `Cargando ${this.categories[0]}...`;
   }
 
   ngAfterViewInit() {
@@ -35,12 +40,27 @@ export class Tab2Page implements OnInit, AfterViewInit {
   segmentChanged(event: CustomEvent) {
     const { value } = event.detail;
     this.news = [];
-    this.loadNews(value);
+    this.currentCategory = value;
+    this.infinite.disabled = false;
+    this.loadNews(value, undefined);
   }
 
-  loadNews(category: string) {
-    this.newService
-      .getTopHeadlinesCategory(category)
-      .subscribe((resp) => this.news.push(...resp.articles));
+  loadNews(category: string, event?: AsyncEvent) {
+    this.newService.getTopHeadlinesCategory(category).subscribe((resp) => {
+      if (event && resp.articles.length === 0) {
+        event.target.complete();
+        event.target.disabled = true;
+        return;
+      }
+      this.news.push(...resp.articles);
+      if (event) {
+        event.target.complete();
+        return;
+      }
+    });
+  }
+
+  loadData(event?: AsyncEvent) {
+    this.loadNews(this.currentCategory, event);
   }
 }
