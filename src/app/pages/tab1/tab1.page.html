@@ -7,23 +7,5 @@
 </ion-header>
 
 <ion-content [fullscreen]="true" color="dark">
-  <ion-grid fixed>
-    <ion-row>
-      <ion-col size="12" size-lg="3" size-md="4" size-sm="6" *ngFor="let article of news; let i = index">
-        <ion-card color="dark">
-          <ion-card-header>
-            <ion-card-subtitle>
-              <span class="text-primary">{{i+1}}. </span>
-              <span class="article-source-name">{{article.source.name}}</span>
-            </ion-card-subtitle>
-            <ion-card-title>{{article.title}}</ion-card-title>
-          </ion-card-header>
-          <ion-img *ngIf="article.urlToImage" [src]="article.urlToImage"></ion-img>
-          <ion-card-content>
-            <p>{{article.description}}</p>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <app-news [news]=news></app-news>
 </ion-content>
