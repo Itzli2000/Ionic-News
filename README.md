@@ -1,12 +1,12 @@
-# Ionic News
+# Ionic News 📰
 
 This is a project to learn and try IONIC framework; it request news from a public API
 
-## Getting Started
+## Getting Started 🥅
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 
-### Prerequisites
+### Prerequisites 🖥️
 
 What things you need to install the software.
 
@@ -17,7 +17,7 @@ Ionic Framework
 AngularJs
 ```
 
-### Installing
+### Installing 🔠
 
 Clone the project to your computer.
 Switch to "development" branch.
@@ -35,7 +35,7 @@ npm start
 
 This will run the react project, and open your browser with the project running on it.
 
-## Running the tests
+## Running the tests 👨‍🎓
 
 To run the project test.
 From your "Line Command" console, navigate to the project folder and run the next instruction:
@@ -46,7 +46,7 @@ npm test
 
 This command, will run the project test suites, and will show the results in the console.
 
-## Built With
+## Built With 🏗️
 
 * [Ionic](https://ionicframework.com/) - The wrapper framework
 * [Angular Js](https://angular.io/) - The web framework
