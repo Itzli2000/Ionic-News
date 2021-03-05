@@ -1,3 +1,4 @@
+import { LocalDataService } from './../../services/local-data.service';
 import { Component } from '@angular/core';
 
 @Component({
@@ -7,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class Tab3Page {
 
-  constructor() {}
+  constructor(
+    public localDataService: LocalDataService,
+  ) {}
 
 }

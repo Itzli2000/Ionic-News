@@ -1,15 +1,18 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
+<ion-header [translucent]="true" class="ion-no-border">
+  <ion-toolbar color="dark">
+    <ion-title> Favoritos </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" color="dark">
+  <ion-card *ngIf="localDataService.news.length === 0" color="dark">
+    <ion-card-header>
+      <ion-card-subtitle>Agrega favoritos</ion-card-subtitle>
+      <ion-card-title>No hay favoritos</ion-card-title>
+    </ion-card-header>
+  </ion-card>
+  <app-news
+    *ngIf="localDataService.news.length > 0"
+    [news]="localDataService.news"
+  ></app-news>
 </ion-content>
