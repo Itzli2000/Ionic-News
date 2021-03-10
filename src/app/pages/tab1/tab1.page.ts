@@ -31,7 +31,7 @@ export class Tab1Page {
     });
   }
 
-  loadData(event: AsyncEvent) {
+  loadData(event: any) {
     this.loadNews(event);
   }
 }

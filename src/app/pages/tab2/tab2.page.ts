@@ -1,4 +1,4 @@
-import { Article, AsyncEvent } from './../../models/interfaces';
+import { Article } from './../../models/interfaces';
 import { NewsService } from './../../services/news.service';
 import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { IonInfiniteScroll, IonSegment } from '@ionic/angular';
@@ -37,7 +37,7 @@ export class Tab2Page implements OnInit, AfterViewInit {
     this.segment.value = this.categories[0];
   }
 
-  segmentChanged(event: CustomEvent) {
+  segmentChanged(event: any) {
     const { value } = event.detail;
     this.news = [];
     this.currentCategory = value;
@@ -45,7 +45,7 @@ export class Tab2Page implements OnInit, AfterViewInit {
     this.loadNews(value, undefined);
   }
 
-  loadNews(category: string, event?: AsyncEvent) {
+  loadNews(category: string, event?: any) {
     this.newService.getTopHeadlinesCategory(category).subscribe((resp) => {
       if (event && resp.articles.length === 0) {
         event.target.complete();
@@ -60,7 +60,7 @@ export class Tab2Page implements OnInit, AfterViewInit {
     });
   }
 
-  loadData(event?: AsyncEvent) {
+  loadData(event?: any) {
     this.loadNews(this.currentCategory, event);
   }
 }
