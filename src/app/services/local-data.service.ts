@@ -24,8 +24,15 @@ export class LocalDataService {
 
   async loadNews() {
     const favs = await this.storage.get('favorites');
-    if(favs) {
-      this.news =  favs;
+    if (favs) {
+      this.news = favs;
     }
+  }
+
+  deleteNews(article: Article) {
+    this.news = this.news.filter(
+      (articleInner) => articleInner.title !== article.title
+    );
+    this.storage.set('favorites', this.news);
   }
 }

@@ -12,6 +12,7 @@
     </ion-card-header>
   </ion-card>
   <app-news
+    [inFavorites]="true"
     *ngIf="localDataService.news.length > 0"
     [news]="localDataService.news"
   ></app-news>
